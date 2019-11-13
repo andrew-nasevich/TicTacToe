@@ -1,0 +1,3 @@
+[submodule "TicTacToe.Foundation"]
+	path = TicTacToe.Foundation
+	url = https://github.com/andrew-nasevich/TicTacToe.Foundation

@@ -1,3 +1,6 @@
 [submodule "src/TicTacToe.Foundation"]
 	path = src/TicTacToe.Foundation
 	url = https://github.com/andrew-nasevich/TicTacToe.Foundation
+[submodule "src/TicTacToe.Common"]
+	path = src/TicTacToe.Common
+	url = https://github.com/andrew-nasevich/TicTacToe.Common

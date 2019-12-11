@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Figures\FigureDrawerProvider.cs" />
+    <Compile Include="Figures\FiguresDrawers\CircleDrawer.cs" />
+    <Compile Include="Figures\FiguresDrawers\CrossDrawer.cs" />
+    <Compile Include="Figures\FiguresDrawers\FigureDrawer.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
+    <Compile Include="Interfaces\IFigureDrawer.cs" />
+    <Compile Include="Interfaces\IFigureDrawerProvider .cs" />
     <Compile Include="Interfaces\IPlayerRegistrationService.cs" />
     <Compile Include="Players\PlayerRegistrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

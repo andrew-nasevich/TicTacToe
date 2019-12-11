@@ -58,7 +58,7 @@ namespace TicTacToe.Console.Players
                 int.TryParse(rawIndex, out chosenFigureTypeIndex);
             } while (chosenFigureTypeIndex <= 0 || chosenFigureTypeIndex > availableFigureTypes.Count);
 
-            return availableFigureTypes.ElementAt(chosenFigureTypeIndex);
+            return availableFigureTypes.ElementAt(chosenFigureTypeIndex - 1);
         }
     }
 }

@@ -4,6 +4,8 @@
     {
         void WriteLine(object value);
 
+        void Write(object value);
+
         string ReadLine();
     }
 }

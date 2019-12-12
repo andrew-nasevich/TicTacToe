@@ -15,7 +15,10 @@ namespace TicTacToe.Console.GameConfigurations
         private readonly IGameConfigurationFactory _gameConfigurationFactory;
 
 
-        public GameConfigurationService(IPlayerRegistrationService playerRegistrationService, IConsole console, IGameConfigurationFactory gameConfigurationFactory)
+        public GameConfigurationService(
+            IPlayerRegistrationService playerRegistrationService, 
+            IConsole console,
+            IGameConfigurationFactory gameConfigurationFactory)
         {
             _playerRegistrationService = playerRegistrationService;
             _console = console;
@@ -38,8 +41,7 @@ namespace TicTacToe.Console.GameConfigurations
             int boardSize;
             do
             {
-                _console.WriteLine("Please, write board size: ");
-                boardSize = _console.ReadInt();
+                boardSize = _console.ReadInt("Please, write board size: ");
             } while (boardSize <= 1);
 
             return boardSize;
@@ -67,8 +69,7 @@ namespace TicTacToe.Console.GameConfigurations
             int amountOfPlayers;
             do
             {
-                _console.WriteLine("Please, write amount of players: ");
-                amountOfPlayers = _console.ReadInt();
+                amountOfPlayers = _console.ReadInt("Please, write amount of players: ");
             } while (amountOfPlayers <= 1 || amountOfPlayers > amountOfFigureTypes);
 
             return amountOfPlayers;
@@ -77,13 +78,12 @@ namespace TicTacToe.Console.GameConfigurations
         private IPlayer GetFirstStepPlayer(IReadOnlyCollection<IPlayer> players)
         {
             _console.WriteLine("Players:");
-            players.ForEach(1, (i, p) => _console.WriteLine($"{i}) {p}"));
+            players.ForEach((p, i) => _console.WriteLine($"{i}) {p.Name}"));
 
             int chosenPlayerIndex;
             do
             {
-                _console.WriteLine("Please, white the number of the player who makes first step:");
-                chosenPlayerIndex = _console.ReadInt();
+                chosenPlayerIndex = _console.ReadInt("Please, white the number of the player who makes first step:");
             } while (chosenPlayerIndex <= 0 || chosenPlayerIndex > players.Count);
 
             return players.ElementAt(chosenPlayerIndex - 1);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TicTacToe.Common.EnumerableExtensions;
 using TicTacToe.Console.Interfaces;
 using TicTacToe.Foundation.Figures;
 using TicTacToe.Foundation.Interfaces;
@@ -35,15 +36,13 @@ namespace TicTacToe.Console.GameConfigurations
         private IPlayer GetFirstStepPlayer(IReadOnlyCollection<IPlayer> players)
         {
             _console.WriteLine("Players:");
-            var i = 1;
-            players.ToList().ForEach(p => _console.WriteLine($"{i++}) {p}"));
+            players.ForEach(1, (i, p) => _console.WriteLine($"{i}) {p}"));
 
             int chosenPlayerIndex;
             do
             {
                 _console.WriteLine("Please, white the number of the player who makes first step:");
-                var rawIndex = _console.ReadLine();
-                int.TryParse(rawIndex, out chosenPlayerIndex);
+                chosenPlayerIndex = _console.ReadInt();
             } while (chosenPlayerIndex <= 0 || chosenPlayerIndex > players.Count);
 
             return players.ElementAt(chosenPlayerIndex - 1);
@@ -72,8 +71,7 @@ namespace TicTacToe.Console.GameConfigurations
             do
             {
                 _console.WriteLine("Please, write amount of players: ");
-                var rawAmountOfPlayers = _console.ReadLine();
-                int.TryParse(rawAmountOfPlayers, out amountOfPlayers);
+                amountOfPlayers = _console.ReadInt();
             } while (amountOfPlayers <= 1 || amountOfPlayers > amountOfFigureTypes);
 
             return amountOfPlayers;
@@ -85,8 +83,7 @@ namespace TicTacToe.Console.GameConfigurations
             do
             {
                 _console.WriteLine("Please, write board size: ");
-                var rawBoardSize = _console.ReadLine();
-                int.TryParse(rawBoardSize, out boardSize);
+                boardSize = _console.ReadInt();
             } while (boardSize <= 1);
 
             return boardSize;

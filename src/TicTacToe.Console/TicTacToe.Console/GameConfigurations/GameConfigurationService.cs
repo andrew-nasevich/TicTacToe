@@ -29,23 +29,20 @@ namespace TicTacToe.Console.GameConfigurations
             var players = GetPlayers();
             var firstStepPlayer = GetFirstStepPlayer(players);
 
-            return _gameConfigurationFactory.CreateGameConfiguration(boardSize, firstStepPlayer, players);
+            return _gameConfigurationFactory.CreateGameConfiguration(boardSize, players, firstStepPlayer);
         }
 
 
-        private IPlayer GetFirstStepPlayer(IReadOnlyCollection<IPlayer> players)
+        private int GetBoardSize()
         {
-            _console.WriteLine("Players:");
-            players.ForEach(1, (i, p) => _console.WriteLine($"{i}) {p}"));
-
-            int chosenPlayerIndex;
+            int boardSize;
             do
             {
-                _console.WriteLine("Please, white the number of the player who makes first step:");
-                chosenPlayerIndex = _console.ReadInt();
-            } while (chosenPlayerIndex <= 0 || chosenPlayerIndex > players.Count);
+                _console.WriteLine("Please, write board size: ");
+                boardSize = _console.ReadInt();
+            } while (boardSize <= 1);
 
-            return players.ElementAt(chosenPlayerIndex - 1);
+            return boardSize;
         }
 
         private IReadOnlyCollection<IPlayer> GetPlayers()
@@ -54,7 +51,7 @@ namespace TicTacToe.Console.GameConfigurations
             var amountOfPlayers = GetAmountOfPlayers(availableFigures.Count);
             var players = new List<IPlayer>();
 
-            for(var i = 0; i < amountOfPlayers; i++)
+            for (var i = 0; i < amountOfPlayers; i++)
             {
                 var player = _playerRegistrationService.RegisterPlayer(availableFigures);
                 players.Add(player);
@@ -77,16 +74,19 @@ namespace TicTacToe.Console.GameConfigurations
             return amountOfPlayers;
         }
 
-        private int GetBoardSize()
+        private IPlayer GetFirstStepPlayer(IReadOnlyCollection<IPlayer> players)
         {
-            int boardSize;
+            _console.WriteLine("Players:");
+            players.ForEach(1, (i, p) => _console.WriteLine($"{i}) {p}"));
+
+            int chosenPlayerIndex;
             do
             {
-                _console.WriteLine("Please, write board size: ");
-                boardSize = _console.ReadInt();
-            } while (boardSize <= 1);
+                _console.WriteLine("Please, white the number of the player who makes first step:");
+                chosenPlayerIndex = _console.ReadInt();
+            } while (chosenPlayerIndex <= 0 || chosenPlayerIndex > players.Count);
 
-            return boardSize;
+            return players.ElementAt(chosenPlayerIndex - 1);
         }
     }
 }

@@ -25,8 +25,7 @@ namespace TicTacToe.Console.Players
 
         public IPlayer RegisterPlayer(IReadOnlyCollection<FigureType> availableFigureTypes)
         {
-            _console.WriteLine("Please, enter player's name: ");
-            var name = _console.ReadString();
+            var name = _console.ReadString("Please, enter player's name: ");
             var figureType = ChooseFigure(availableFigureTypes);
 
             return _playerFactory.CreatePlayer(name, figureType);
@@ -47,13 +46,12 @@ namespace TicTacToe.Console.Players
             }
 
             _console.WriteLine("Available figures types:");
-            availableFigureTypes.ForEach(1, (i, ft) => _console.WriteLine($"{i}) {ft}"));
+            availableFigureTypes.ForEach((ft, i) => _console.WriteLine($"{++i}) {ft}"));
 
             int chosenFigureTypeIndex;
             do
             {
-                _console.WriteLine("Please, write your figure type number:");
-                chosenFigureTypeIndex = _console.ReadInt();
+                chosenFigureTypeIndex = _console.ReadInt("Please, write your figure type number:");
             } while (chosenFigureTypeIndex <= 0 || chosenFigureTypeIndex > availableFigureTypes.Count);
 
             return availableFigureTypes.ElementAt(chosenFigureTypeIndex - 1);

@@ -2,12 +2,12 @@
 {
     public interface IConsole
     {
-        void WriteLine(object value);
+        void WriteLine(string value);
 
-        void Write(object value);
+        void Write(string value);
 
-        string ReadString();
+        string ReadString(string message);
 
-        int ReadInt();
+        int ReadInt(string message);
     }
 }

@@ -6,6 +6,8 @@
 
         void Write(object value);
 
-        string ReadLine();
+        string ReadString();
+
+        int ReadInt();
     }
 }

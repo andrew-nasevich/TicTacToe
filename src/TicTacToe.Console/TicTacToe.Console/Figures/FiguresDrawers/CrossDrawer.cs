@@ -1,20 +1,26 @@
 ﻿using TicTacToe.Console.Interfaces;
 using TicTacToe.Foundation.Figures;
+using TicTacToe.Foundation.Interfaces;
 
 namespace TicTacToe.Console.Figures.FiguresDrawers
 {
     public class CrossDrawer : FigureDrawer, IFigureDrawer
     {
-        public CrossDrawer(IConsole console, FigureType figureType) 
-            : base(console, figureType)
-        {
+        private readonly IConsole _console;
 
+
+        public CrossDrawer(IConsole console, FigureType figureType) 
+            : base(figureType)
+        {
+            _console = console;
         }
 
 
-        public override void DrawFigure()
+        protected override void Draw(IFigure figure)
         {
-            Console.Write("x");
+            base.DrawFigure(figure);
+
+            _console.Write("x");
         }
     }
 }

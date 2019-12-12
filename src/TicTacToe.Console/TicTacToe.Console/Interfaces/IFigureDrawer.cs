@@ -1,4 +1,5 @@
 ﻿using TicTacToe.Foundation.Figures;
+using TicTacToe.Foundation.Interfaces;
 
 namespace TicTacToe.Console.Interfaces
 {
@@ -7,6 +8,6 @@ namespace TicTacToe.Console.Interfaces
         FigureType FigureType { get; }
 
 
-        void DrawFigure();
+        void DrawFigure(IFigure figure);
     }
 }

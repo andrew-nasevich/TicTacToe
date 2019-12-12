@@ -22,9 +22,7 @@ namespace TicTacToe.Console.Figures
 
         public IFigureDrawer GetFigureDrawer(FigureType figureType)
         {
-            _figureDrawers.TryGetValue(figureType, out var figureDrawer);
-
-            return figureDrawer;
+            return _figureDrawers.TryGetValue(figureType, out var figureDrawer) ? figureDrawer : null;
         }
     }
 }

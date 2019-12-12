@@ -18,8 +18,6 @@ namespace TicTacToe.Console.Figures.FiguresDrawers
 
         protected override void Draw(IFigure figure)
         {
-            base.DrawFigure(figure);
-
             _console.Write("x");
         }
     }

@@ -46,15 +46,15 @@ namespace TicTacToe.Console.Players
             }
 
             _console.WriteLine("Available figures types:");
-            availableFigureTypes.ForEach((ft, i) => _console.WriteLine($"{++i}) {ft}"));
+            availableFigureTypes.ForEach((ft, i) => _console.WriteLine($"{i + 1}) {ft}"));
 
-            int chosenFigureTypeIndex;
+            int chosenFigureTypeNum;
             do
             {
-                chosenFigureTypeIndex = _console.ReadInt("Please, write your figure type number:");
-            } while (chosenFigureTypeIndex <= 0 || chosenFigureTypeIndex > availableFigureTypes.Count);
+                chosenFigureTypeNum = _console.ReadInt("Please, write your figure type number:");
+            } while (chosenFigureTypeNum <= 0 || chosenFigureTypeNum > availableFigureTypes.Count);
 
-            return availableFigureTypes.ElementAt(chosenFigureTypeIndex - 1);
+            return availableFigureTypes.ElementAt(chosenFigureTypeNum - 1);
         }
     }
 }

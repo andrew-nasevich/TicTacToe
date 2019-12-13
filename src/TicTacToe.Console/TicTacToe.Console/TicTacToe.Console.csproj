@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D2E97FFB-5363-45EE-8E1A-5DE0F057E5F6}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TicTacToe</RootNamespace>
-    <AssemblyName>TicTacToe</AssemblyName>
+    <ProjectGuid>{AA83AD16-9086-4A30-B7C9-B8472809B826}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TicTacToe.Console</RootNamespace>
+    <AssemblyName>TicTacToe.Console</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,20 +30,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Console\Console.cs" />
+    <Compile Include="Interfaces\IConsole.cs" />
+    <Compile Include="Interfaces\IPlayerRegistrationService.cs" />
+    <Compile Include="Players\PlayerRegistrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\..\TicTacToe.Common\TicTacToe.Common\TicTacToe.Common.csproj">
+      <Project>{6422df80-855a-4803-8232-bd04b8a2c8b6}</Project>
+      <Name>TicTacToe.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TicTacToe.Foundation\TicTacToe.Foundation\TicTacToe.Foundation.csproj">
+      <Project>{2fdb5c28-daed-43ac-b783-c2e6fe7a1341}</Project>
+      <Name>TicTacToe.Foundation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

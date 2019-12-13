@@ -26,10 +26,10 @@ namespace TicTacToe.Console.GameConfigurations
         }
 
 
-        public IGameConfiguration GetGameConfiguration()
+        public IGameConfiguration GetGameConfiguration(IGameConfiguration existingGameConfiguration)
         {
             var boardSize = GetBoardSize();
-            var players = GetPlayers();
+            var players = existingGameConfiguration != null ? existingGameConfiguration.Players : GetPlayers();
             var firstStepPlayer = GetFirstStepPlayer(players);
 
             return _gameConfigurationFactory.CreateGameConfiguration(boardSize, players, firstStepPlayer);
@@ -78,15 +78,15 @@ namespace TicTacToe.Console.GameConfigurations
         private IPlayer GetFirstStepPlayer(IReadOnlyCollection<IPlayer> players)
         {
             _console.WriteLine("Players:");
-            players.ForEach((p, i) => _console.WriteLine($"{i}) {p.Name}"));
+            players.ForEach((p, i) => _console.WriteLine($"{i + 1}) {p.Name}"));
 
-            int chosenPlayerIndex;
+            int chosenNumberOfPlayer;
             do
             {
-                chosenPlayerIndex = _console.ReadInt("Please, white the number of the player who makes first step:");
-            } while (chosenPlayerIndex <= 0 || chosenPlayerIndex > players.Count);
+                chosenNumberOfPlayer = _console.ReadInt("Please, white the number of the player who makes first step:");
+            } while (chosenNumberOfPlayer <= 0 || chosenNumberOfPlayer > players.Count);
 
-            return players.ElementAt(chosenPlayerIndex - 1);
+            return players.ElementAt(chosenNumberOfPlayer - 1);
         }
     }
 }

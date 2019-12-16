@@ -10,6 +10,11 @@ namespace TicTacToe.Console.Console
             System.Console.WriteLine(value);
         }
 
+        public void WriteLine()
+        {
+            WriteLine(String.Empty);
+        }
+
         public void Write(string value)
         {
             System.Console.Write(value);

@@ -4,6 +4,6 @@ namespace TicTacToe.Console.Interfaces
 {
     public interface IGameConfigurationService
     {
-        IGameConfiguration GetGameConfiguration();
+        IGameConfiguration GetGameConfiguration(IGameConfiguration existingGameConfiguration = null);
     }
 }

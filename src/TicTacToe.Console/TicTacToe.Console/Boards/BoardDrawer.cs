@@ -19,16 +19,16 @@ namespace TicTacToe.Console.Boards
 
         public void DrawBoard(IBoard board)
         {
-            DrawBoardBoarder(board);
+            DrawBoardBorder(board);
             for (var row = 0; row < board.BoardSize; row++)
             {
                 DrawBoardRow(board, row);
-                DrawBoardBoarder(board);
+                DrawBoardBorder(board);
             }
         }
 
 
-        private void DrawBoardBoarder(IBoard board)
+        private void DrawBoardBorder(IBoard board)
         {
             _console.WriteLine("+" + Enumerable.Repeat("-+", board.BoardSize));
         }

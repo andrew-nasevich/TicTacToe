@@ -7,27 +7,27 @@ namespace TicTacToe.Console.Figures
     public class FigureDrawerProvider : IFigureDrawerProvider
     {
         private readonly IFigureDrawerFactory _figureDrawerFactory;
+
         private readonly IDictionary<FigureType, IFigureDrawer> _figureDrawers;
         
 
         public FigureDrawerProvider(IFigureDrawerFactory figureDrawerFactory)
         {
             _figureDrawerFactory = figureDrawerFactory;
+
             _figureDrawers = new Dictionary<FigureType, IFigureDrawer>();
         }
 
 
         public IFigureDrawer GetFigureDrawer(FigureType figureType)
         {
-            if (_figureDrawers.TryGetValue(figureType, out var figureDrawer))
+            if (!_figureDrawers.TryGetValue(figureType, out var figureDrawer))
             {
-                return figureDrawer;
+                figureDrawer = _figureDrawerFactory.CreateFigureDrawer(figureType);
+                _figureDrawers.Add(figureDrawer.FigureType, figureDrawer);
             }
 
-            var newFigureDrawer = _figureDrawerFactory.CreateFigureDrawer(figureType);
-            _figureDrawers.Add(newFigureDrawer.FigureType, newFigureDrawer);
-
-            return newFigureDrawer;
+            return figureDrawer;
         }
     }
 }

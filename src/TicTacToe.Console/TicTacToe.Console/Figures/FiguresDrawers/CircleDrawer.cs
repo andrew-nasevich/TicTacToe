@@ -9,8 +9,8 @@ namespace TicTacToe.Console.Figures.FiguresDrawers
         private readonly IConsole _console;
 
 
-        public CircleDrawer(IConsole console, FigureType figureType) 
-            : base(figureType)
+        public CircleDrawer(IConsole console) 
+            : base(FigureType.Circle)
         {
             _console = console;
         }

@@ -43,10 +43,12 @@
     <Compile Include="Figures\FiguresDrawers\FigureDrawer.cs" />
     <Compile Include="Console\Console.cs" />
     <Compile Include="Interfaces\IBoardDrawer.cs" />
+    <Compile Include="GameConfigurations\GameConfigurationService.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
     <Compile Include="Interfaces\IFigureDrawer.cs" />
     <Compile Include="Interfaces\IFigureDrawerFactory.cs" />
     <Compile Include="Interfaces\IFigureDrawerProvider .cs" />
+    <Compile Include="Interfaces\IGameConfigurationService.cs" />
     <Compile Include="Interfaces\IPlayerRegistrationService.cs" />
     <Compile Include="Players\PlayerRegistrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

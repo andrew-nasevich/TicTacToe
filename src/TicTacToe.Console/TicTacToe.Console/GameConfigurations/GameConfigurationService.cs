@@ -26,7 +26,7 @@ namespace TicTacToe.Console.GameConfigurations
         }
 
 
-        public IGameConfiguration GetGameConfiguration(IGameConfiguration existingGameConfiguration)
+        public IGameConfiguration GetGameConfiguration(IGameConfiguration existingGameConfiguration = null)
         {
             var boardSize = GetBoardSize();
             var players = existingGameConfiguration != null ? existingGameConfiguration.Players : GetPlayers();

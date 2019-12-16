@@ -36,7 +36,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Console\Console.cs" />
+    <Compile Include="GameConfigurations\GameConfigurationService.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
+    <Compile Include="Interfaces\IGameConfigurationService.cs" />
     <Compile Include="Interfaces\IPlayerRegistrationService.cs" />
     <Compile Include="Players\PlayerRegistrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

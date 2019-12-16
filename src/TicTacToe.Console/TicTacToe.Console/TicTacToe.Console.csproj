@@ -35,10 +35,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Figures\FigureDrawerFactory.cs" />
+    <Compile Include="Figures\FigureDrawerProvider.cs" />
+    <Compile Include="Figures\FiguresDrawers\CircleDrawer.cs" />
+    <Compile Include="Figures\FiguresDrawers\CrossDrawer.cs" />
+    <Compile Include="Figures\FiguresDrawers\FigureDrawer.cs" />
     <Compile Include="Console\Console.cs" />
     <Compile Include="GameConfigurations\GameConfigurationService.cs" />
     <Compile Include="Interfaces\IConsole.cs" />
     <Compile Include="Interfaces\IGameConfigurationService.cs" />
+    <Compile Include="Interfaces\IFigureDrawer.cs" />
+    <Compile Include="Interfaces\IFigureDrawerFactory.cs" />
+    <Compile Include="Interfaces\IFigureDrawerProvider .cs" />
     <Compile Include="Interfaces\IPlayerRegistrationService.cs" />
     <Compile Include="Players\PlayerRegistrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

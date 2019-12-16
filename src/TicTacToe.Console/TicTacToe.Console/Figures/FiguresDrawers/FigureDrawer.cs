@@ -20,7 +20,7 @@ namespace TicTacToe.Console.Figures.FiguresDrawers
         {
             if (figure.Type != FigureType)
             {
-                throw new InvalidOperationException($"The type of the received figure: {figure.Type} isn't equal to FigureType: {FigureType}");
+                throw new InvalidOperationException($"The type of the received figure should be: {FigureType}");
             }
             Draw(figure);
         }

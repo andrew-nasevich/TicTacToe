@@ -37,7 +37,7 @@ namespace TicTacToe.Console.Boards
         {
             _console.Write("|");
 
-            var cells = board.Where(c => c.Row == row);
+            var cells = board.Where(c => c.Row == row).ToList();
             foreach (var cell in cells)
             {
                 if (cell.IsEmpty)

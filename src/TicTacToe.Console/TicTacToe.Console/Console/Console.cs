@@ -5,9 +5,14 @@ namespace TicTacToe.Console.Console
 {
     public class Console : IConsole
     {
-        public void WriteLine(string value = "")
+        public void WriteLine(string value)
         {
             System.Console.WriteLine(value);
+        }
+
+        public void WriteLine()
+        {
+            WriteLine(String.Empty);
         }
 
         public void Write(string value)

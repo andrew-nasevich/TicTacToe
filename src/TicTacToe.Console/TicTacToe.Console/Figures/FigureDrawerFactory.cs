@@ -21,11 +21,11 @@ namespace TicTacToe.Console.Figures
             switch (figureType)
             {
                 case FigureType.Circle:
-                    return new CircleDrawer(_console, figureType);
+                    return new CircleDrawer(_console);
                 case FigureType.Cross:
-                    return new CrossDrawer(_console, figureType);
+                    return new CrossDrawer(_console);
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(figureType), figureType, "Unknown figureType value");
+                    throw new ArgumentOutOfRangeException($"Unknown figureType value: {figureType}");
             }
         }
     }

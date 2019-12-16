@@ -9,8 +9,8 @@ namespace TicTacToe.Console.Figures.FiguresDrawers
         private readonly IConsole _console;
 
 
-        public CrossDrawer(IConsole console, FigureType figureType) 
-            : base(figureType)
+        public CrossDrawer(IConsole console) 
+            : base(FigureType.Cross)
         {
             _console = console;
         }

@@ -47,5 +47,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicTacToe.Console\TicTacToe.Console\TicTacToe.Console.csproj">
+      <Project>{aa83ad16-9086-4a30-b7c9-b8472809b826}</Project>
+      <Name>TicTacToe.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicTacToe.Foundation\TicTacToe.Foundation\TicTacToe.Foundation.csproj">
+      <Project>{2fdb5c28-daed-43ac-b783-c2e6fe7a1341}</Project>
+      <Name>TicTacToe.Foundation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@ using TicTacToe.Foundation.Interfaces;
 
 namespace TicTacToe.Console.Figures.FiguresDrawers
 {
-    public class CircleDrawer : FigureDrawer, IFigureDrawer
+    public class CircleDrawer : FigureDrawer
     {
         private readonly IConsole _console;
 

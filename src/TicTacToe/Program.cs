@@ -20,51 +20,58 @@ namespace TicTacToe
 {
     public class Program
     {
-        private static IConsole _console;
-        private static IBoardDrawer _boardDrawer;
+        private static readonly IConsole Console;
+        private static readonly IBoardDrawer BoardDrawer;
+
+
+        static Program()
+        {
+            Console = new GameConsole();
+
+            var figureDrawerFactory = new FigureDrawerFactory(Console);
+            var figureDrawerProvider = new FigureDrawerProvider(figureDrawerFactory);
+            BoardDrawer = new BoardDrawer(figureDrawerProvider, Console);
+        }
+
 
         public static void Main(string[] args)
         {
-            _console = new GameConsole();
-
-            var figureDrawerFactory = new FigureDrawerFactory(_console);
-            var figureDrawerProvider = new FigureDrawerProvider(figureDrawerFactory); 
-            _boardDrawer = new BoardDrawer(figureDrawerProvider, _console);
-
-            var gameInputProvider = new GameInputProvider(_console);
             var playerFactory = new PlayerFactory();
-
-            var playerRegistrationService = new PlayerRegistrationService(playerFactory, _console);
+            var playerRegistrationService = new PlayerRegistrationService(playerFactory, Console);
             var gameConfigurationFactory = new GameConfigurationFactory();
-            var gameConfigurationService = new GameConfigurationService(playerRegistrationService, _console, gameConfigurationFactory);
+            var gameConfigurationService = new GameConfigurationService(playerRegistrationService, Console, gameConfigurationFactory);
 
+            var gameInputProvider = new GameInputProvider(Console);
             var cellFactory = new CellFactory();
             var figureFactory = new FigureFactory();
             var boardFactory = new BoardFactory(cellFactory, figureFactory);
-
             var winningStateFactory = new WinningStateFactory();
+            var gameFactory = new GameFactory(gameInputProvider, boardFactory, winningStateFactory);
 
             IGameConfiguration gameConfiguration = null;
             int chosenOption;
             do
             {
                 gameConfiguration = gameConfigurationService.GetGameConfiguration(gameConfiguration);
+                var game = gameFactory.CreateGame(gameConfiguration);
 
-                var game = new Game(gameInputProvider, gameConfiguration, boardFactory, winningStateFactory);
                 game.GameStepCompleted += OnGameStepCompleted;
                 game.GameFinished += OnGameFinished;
 
                 game.Run();
-                
-                _console.WriteLine("Next possible options:");
-                _console.WriteLine("1) Start new game with new players");
-                _console.WriteLine("2) Start new game with the same players");
-                _console.WriteLine("3) Exit");
+
+                game.GameStepCompleted -= OnGameStepCompleted;
+                game.GameFinished -= OnGameFinished;
+
+                Console.WriteLine("Next possible options:");
+                Console.WriteLine("1) Start new game with new players");
+                Console.WriteLine("2) Start new game with the same players");
+                Console.WriteLine("3) Exit");
 
                 do
                 {
-                    chosenOption = _console.ReadInt("Please, choose an option: ");
-                } while (chosenOption <= 0 || chosenOption > 3);
+                    chosenOption = Console.ReadInt("Please, choose an option: ");
+                } while (chosenOption < 0 || chosenOption >= 3);
 
                 if (chosenOption == 1)
                 {
@@ -75,23 +82,6 @@ namespace TicTacToe
         }
 
 
-        private static void OnGameFinished(object sender, GameFinishedEventArgs e)
-        {
-            var gameResult = e.GameResult;
-            switch (gameResult.GameResultType)
-            {
-                case GameResultType.Draw:
-                    _console.WriteLine("Friendship won!");
-                    break;
-                case GameResultType.Win:
-                    var winResult = (WinGameResult)gameResult;
-                    _console.WriteLine($"Player {winResult.WonPlayer.Name} won!");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException($"Unknown GameResultType value: {gameResult.GameResultType}");
-            }
-        }
-
         private static void OnGameStepCompleted(object sender, GameStepCompletedEventArgs e)
         {
             var stepResult = e.StepResult;
@@ -99,18 +89,41 @@ namespace TicTacToe
             {
                 case StepResultType.Success:
                     var successResult = (SuccessStepResult)stepResult;
-                    _boardDrawer.DrawBoard(successResult.Board);
+                    BoardDrawer.DrawBoard(successResult.Board);
                     break;
                 case StepResultType.CellIsAlreadyFilled:
                     var filledCellResult = (CellIsAlreadyFilledStepResult)stepResult;
-                    _console.WriteLine($"This cell is already filled with figure: {filledCellResult.Cell.Figure.Type}");
+                    Console.WriteLine($"This cell is already filled with figure: {filledCellResult.Cell.Figure.Type}");
                     break;
                 case StepResultType.InvalidCellPosition:
                     var invalidResult = (InvalidCellPositionStepResult)stepResult;
-                    _console.WriteLine($"This is no cell at position: ({invalidResult.SelectedColumn},{invalidResult.SelectedRow})");
+                    Console.WriteLine($"This is no cell at position: ({invalidResult.SelectedColumn},{invalidResult.SelectedRow})");
                     break;
                 default:
-                    throw  new ArgumentOutOfRangeException($"Unknown StepResultType value: {stepResult.StepResultType}");
+                    throw new ArgumentOutOfRangeException($"Unknown StepResultType value: {stepResult.StepResultType}");
+            }
+        }
+
+        private static void OnGameFinished(object sender, GameFinishedEventArgs e)
+        {
+            var gameResult = e.GameResult;
+            switch (gameResult.GameResultType)
+            {
+                case GameResultType.Draw:
+                    Console.WriteLine("Friendship won!");
+                    break;
+                case GameResultType.Win:
+                    var winResult = (WinGameResult)gameResult;
+                    Console.WriteLine($"Player {winResult.WonPlayer.Name} won!");
+                    Console.Write("Winning combination: ");
+                    foreach (var cell in winResult.WinningCollection)
+                    {
+                        Console.Write($"({cell.Row + 1},{cell.Column + 1}) ");
+                    }
+                    Console.WriteLine();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException($"Unknown GameResultType value: {gameResult.GameResultType}");
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TicTacToe.Console.Interfaces;
 using TicTacToe.Foundation.Interfaces;
 
@@ -30,7 +31,7 @@ namespace TicTacToe.Console.Boards
 
         private void DrawBoardBorder(IBoard board)
         {
-            _console.WriteLine("+" + Enumerable.Repeat("-+", board.BoardSize));
+            _console.WriteLine("+" + String.Concat(Enumerable.Repeat("-+", board.BoardSize)));
         }
 
         private void DrawBoardRow(IBoard board, int row)

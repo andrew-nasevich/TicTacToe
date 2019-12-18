@@ -83,7 +83,7 @@ namespace TicTacToe.Console.GameConfigurations
             int chosenNumberOfPlayer;
             do
             {
-                chosenNumberOfPlayer = _console.ReadInt("Please, white the number of the player who makes first step:");
+                chosenNumberOfPlayer = _console.ReadInt("Please, write the number of the player who makes first step:");
             } while (chosenNumberOfPlayer <= 0 || chosenNumberOfPlayer > players.Count);
 
             return players.ElementAt(chosenNumberOfPlayer - 1);

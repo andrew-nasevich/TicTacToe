@@ -3,7 +3,7 @@ using TicTacToe.Console.Interfaces;
 
 namespace TicTacToe.Console.Console
 {
-    public class Console : IConsole
+    public class GameConsole : IConsole
     {
         public void WriteLine(string value)
         {

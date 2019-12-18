@@ -25,7 +25,7 @@ namespace TicTacToe.Console.Players
 
         public IPlayer RegisterPlayer(IReadOnlyCollection<FigureType> availableFigureTypes)
         {
-            var name = _console.ReadString("Please, enter player's name: ");
+            var name = _console.ReadString("Please, write player's name: ");
             var figureType = ChooseFigure(availableFigureTypes);
 
             return _playerFactory.CreatePlayer(name, figureType);
